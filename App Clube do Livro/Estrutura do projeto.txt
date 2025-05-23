@@ -1,0 +1,8 @@
+src/
+└── app/
+    └── pages/
+        ├── livros/
+        ├── autores/
+        ├── eventos/
+        ├── membros/
+        └── estatisticas/

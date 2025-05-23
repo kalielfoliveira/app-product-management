@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "teii-2025-1-gamer-house-app-main"
+		},
+		{
+			"path": "app-book-club"
+		}
+	],
+	"settings": {
+		"abl.checkProgressBinary": false,
+		"abl.warnConfigFile": false
+	}
+}
