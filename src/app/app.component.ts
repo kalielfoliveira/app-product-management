@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { home, list, informationCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
+
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    addIcons({ home, list, informationCircle });
+  }
 }
