@@ -1,0 +1,26 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home" [routerLink]="['/home']">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Início</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="products-list" [routerLink]="['/products']">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Produtos</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="about" [routerLink]="['/about']">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Sobre</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="users-list" [routerLink]="['/users']">
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Usuários</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-app>

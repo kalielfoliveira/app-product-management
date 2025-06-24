@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Lista de Usuários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input formControlName="name" labelPlacement="floating" label="Nome:"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select formControlName="role" labelPlacement="floating" label="Perfil:">
+        <ion-select-option value="user">Usuário</ion-select-option>
+        <ion-select-option value="admin">Administrador</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="email" labelPlacement="floating" label="E-mail:"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="password" type="password" labelPlacement="floating" label="Senha:"></ion-input>
+    </ion-item>
+    <ion-item>
+      <label for="fileInput">Selecione uma imagem:</label>
+      <input id="fileInput" type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="userForm.invalid">
+      {{ editingUser ? 'Atualizar Usuário' : 'Cadastrar Usuário' }}
+    </ion-button>
+    <ion-button expand="block" type="button" (click)="cancel()" *ngIf="editingUser">
+      Cancelar
+    </ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start" *ngIf="user.photo">
+        <img
+          [src]="environment.apiUrl + '/uploads/users/' + user.photo"
+          alt="Foto do usuário"
+          width="48"
+          height="48"
+          class="user-avatar">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+        <p>Perfil: {{ user.role }}</p>
+      </ion-label>  
+      <ion-button fill="clear" (click)="editUser(user)">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="deleteUser(user.id)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

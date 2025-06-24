@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Lista de Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input formControlName="name" labelPlacement="floating" label="Nome:"></ion-input>
+      @if(hasError('name', 'required')) {
+          <i>O campo é obrigatório</i>
+        }
+        @if(hasError('name', 'minlength')) {
+          <i>O campo deve ter no mínimo 3 caracteres</i>
+        }
+        @if(hasError('name', 'maxlength')) {
+          <i>O campo deve ter no máximo 33 caracteres</i>
+        }
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="description" labelPlacement="floating" label="Descrição:"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="price" type="number" labelPlacement="floating" label="Preço:"></ion-input>
+      @if(hasError('price', 'required')) {
+          <i>Preço não pode ser vazio</i>
+        }
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="productForm.invalid">
+      {{ editingProduct ? 'Atualizar Produto' : 'Cadastrar Produto' }}
+    </ion-button>
+    <ion-button
+      expand="block"
+      type="button"
+      (click)="cancel()"
+      *ngIf="editingProduct"
+      id="cancel-btn"
+    >
+      Cancelar
+    </ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let product of products">
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price | currency:'R$ ':'symbol':'1.0-0' }}</p>
+      </ion-label>
+
+      <ion-button fill="clear" (click)="toggleBought(product)">
+        <ion-icon
+          [name]="product.bought ? 'checkmark-circle' : 'ellipse-outline'"
+        ></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" (click)="toggleFavorite(product)">
+        <ion-icon
+          [name]="product.favorite ? 'star' : 'star-outline'"
+        ></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" (click)="editProduct(product)">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        fill="clear"
+        (click)="deleteProduct(product.id)"
+        color="danger"
+        [id]="'delete-btn-' + product.id"
+        class="delete-btn">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
